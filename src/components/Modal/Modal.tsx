@@ -4,8 +4,15 @@ import {
   ImageModal,
   ButtonModal,
 } from '../GalleryItem/GalleryItem.styled';
+import type { Styles } from "react-modal";
 
-const customStyles = {
+interface CustomModalProps {
+  isOpen: boolean;
+  onRequestClose: () => void;
+  imageUrl: string;
+}
+
+const customStyles: Styles = {
   overlay: {
     position: 'fixed',
     top: 0,
@@ -25,11 +32,12 @@ const customStyles = {
   },
 };
 
-Modal.setAppElement('#root');
-
-export const CustomModal = ({ isOpen, onRequestClose, imageUrl }) => {
-  return(
-  
+export const CustomModal: React.FC<CustomModalProps> = ({
+  isOpen,
+  onRequestClose,
+  imageUrl,
+}) => {
+  return (
     <Modal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
@@ -39,5 +47,5 @@ export const CustomModal = ({ isOpen, onRequestClose, imageUrl }) => {
       <ButtonModal onClick={onRequestClose}>close</ButtonModal>
       <ImageModal src={imageUrl} alt="" />
     </Modal>
-  )
+  );
 };
